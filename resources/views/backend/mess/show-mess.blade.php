@@ -29,7 +29,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span><i class="fas fa-user fa-fw mr-1"></i>View Mess Pofile</span>
-                    <small class="d-sm-block"><a id="approve" href="{{ route('mess.delete') }}" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i> Delete Mess</a></small>
+                    <small class="d-sm-block"><a id="deletemass" href="{{ route('mess.delete') }}" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i> Delete Mess</a></small>
                 </div>
                 <div class="card-body">
                     <section class="section">

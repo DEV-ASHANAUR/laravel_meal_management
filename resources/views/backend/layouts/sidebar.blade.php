@@ -24,6 +24,18 @@
                 </div>
                 @endif
                 {{-- manage user end --}}
+                {{-- manage meal start --}}
+                {{-- @if(Auth::user()->usertype !=='member') --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts"
+                    ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Manage Meal
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                ></a>
+                <div class="collapse {{ ($prefix == '/meal')?'show':'' }}" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link {{ ($route == 'meal.view')?'active':'' }}" href="{{ route('meal.view') }}">View View</a>
+                </div>
+                {{-- @endif --}}
+                {{-- manage meal end --}}
                 
             </div>    
         </div>

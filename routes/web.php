@@ -50,7 +50,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit','Backend\MessController@edit')->name('mess.edit');
         Route::post('/update','Backend\MessController@update')->name('mess.update');
         Route::get('/delete','Backend\MessController@delete')->name('mess.delete');
+    });
+    //manage meal
+    Route::group(['prefix' => 'meal'], function () {
+        Route::get('/view','Backend\MealController@index')->name('meal.view');
+        Route::get('/show','Backend\MealController@show')->name('meal.show');
+        Route::get('/create','Backend\MealController@create')->name('meal.create');
+        Route::post('/store','Backend\MealController@store')->name('meal.store');
+        Route::get('/delete/{date}','Backend\MealController@delete')->name('meal.delete');
 
+
+        
     });
     
 });    

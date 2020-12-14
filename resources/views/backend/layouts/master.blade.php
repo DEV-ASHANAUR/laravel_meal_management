@@ -26,14 +26,7 @@
         <script src="{{ asset('backend') }}/js/sweetalert.js"></script>
         <link rel="stylesheet" href="{{ asset('backend') }}/css/sweetalert.css">
         @yield('style')
-        {{-- //sweetalert --}}
-        
-       {{-- <style type="text/css">
-            button.btn.btn-outline-secondary.border-left-0 {
-                display: none!important;
-                }
-        </style> --}}
-        {{-- <script src="{{ asset('public/backend') }}/js/notify.js"></script> --}}
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -126,33 +119,7 @@
               }
             @endif  
           </script>
-          {{-- //delete sweetalert --}}
-          {{-- <script>
-              $(document).ready(function(){
-                $(document).on('click','#delete',function(e){
-                    e.preventDefault();
-                    var link = $(this).attr('href');
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                        if (result.value) {
-                            window.location.href = link;
-                            Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                            )
-                        }
-                     });
-                });
-              });
-          </script> --}}
+          
           <script>
               $(document).ready(function(){
                 $(document).on('click','#delete',function(){
@@ -200,11 +167,11 @@
         {{-- //approve sweetalert --}}
         <script>
             $(document).ready(function(){
-              $(document).on('click','#approve',function(e){
+              $(document).on('click','#deletemass',function(e){
                   e.preventDefault();
                   var link = $(this).attr('href');
                     // alert(link);
-                  var answer = confirm("Are You Sure , Delete Mess ?")
+                  var answer = confirm("Are You Sure , Delete This ?")
                   if (answer){
                     alert("Allah hafiz!");
                     window.location = link;
