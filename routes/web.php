@@ -57,10 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/show','Backend\MealController@show')->name('meal.show');
         Route::get('/create','Backend\MealController@create')->name('meal.create');
         Route::post('/store','Backend\MealController@store')->name('meal.store');
+        Route::get('/edit/{date}','Backend\MealController@edit')->name('meal.edit');
+        Route::post('/update','Backend\MealController@update')->name('meal.update');
         Route::get('/delete/{date}','Backend\MealController@delete')->name('meal.delete');
 
-
-        
     });
     
 });    

@@ -19,6 +19,7 @@ class CreateMealsTable extends Migration
             $table->integer('mess_id');
             $table->double('meal');
             $table->date('date');
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }

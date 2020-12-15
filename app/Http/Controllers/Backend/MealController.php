@@ -26,7 +26,42 @@ class MealController extends Controller
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
-    }   
+    }      
+    /**
+     * edit
+     *
+     * @param  mixed $date
+     * @return particular date meal
+     */
+    public function edit($date)
+    {
+        $mess_id = Auth::user()->mess_id;
+        $editMeal = Meal::with('user')->where('mess_id',$mess_id)->where('date',$date)->get();
+        return view("backend.meal.edit",compact('editMeal'));
+    } 
+    public function update(Request $request)
+    {
+        // dd($request->all());
+        $mess_id = Auth::user()->mess_id;
+        $user_id = count($request->user_id);
+        for($i = 0; $i < $user_id; $i++ ){
+            $meal = Meal::where('mess_id',$mess_id)->where('date',$request->date)->where('user_id',$request->user_id[$i])->first();
+            $meal->user_id = $request->user_id[$i];
+            $meal->mess_id = $mess_id;
+            $meal->meal = $request->meal[$i];
+            $meal->date = $request->date;
+            $meal->created_by = Auth::user()->id;
+            $meal->save();
+        }
+        $notification=array(
+            'message'=>'Successfully Meal Updated !',
+            'alert-type'=>'success'
+        );
+        // return redirect()->route('meal.view')->with($notification);
+        return redirect()->back()->with($notification);
+
+        
+    }
     /**
      * create
      *
@@ -59,12 +94,13 @@ class MealController extends Controller
         }else{
             $user_id = count($request->user_id);
             for($i = 0; $i < $user_id; $i++ ){
-            $meal = new Meal();
-            $meal->user_id = $request->user_id[$i];
-            $meal->mess_id = $mess_id;
-            $meal->meal = $request->meal[$i];
-            $meal->date = $date;
-            $meal->save();
+                $meal = new Meal();
+                $meal->user_id = $request->user_id[$i];
+                $meal->mess_id = $mess_id;
+                $meal->meal = $request->meal[$i];
+                $meal->date = $date;
+                $meal->created_by = Auth::user()->id;
+                $meal->save();
             }
             $notification=array(
                 'message'=>'Successfully Meal Added !',
@@ -74,6 +110,7 @@ class MealController extends Controller
         }
         
     }
+    
     
     
     

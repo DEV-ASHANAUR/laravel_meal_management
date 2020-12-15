@@ -36,9 +36,9 @@
                                     <td>{{ $meal->date }}</td>
                                     <td>{{ $meal->total }}</td>
                                     <td>
-                                        {{-- <a href="{{ route('meal.show',$meal->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a>
+                                        {{-- <a href="{{ route('meal.show',$meal->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a> --}}
 
-                                        <a href="{{ route('users.edit',$meal->id) }}" title="Edit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-1"></i></a> --}}
+                                        <a href="{{ route('meal.edit',$meal->date) }}" title="Edit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-1"></i></a>
 
                                         <a href="{{ route('meal.delete',$meal->date) }}" id="deletemass" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i></a>
                                     </td>
