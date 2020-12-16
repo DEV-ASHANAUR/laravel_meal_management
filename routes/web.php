@@ -60,7 +60,32 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit/{date}','Backend\MealController@edit')->name('meal.edit');
         Route::post('/update','Backend\MealController@update')->name('meal.update');
         Route::get('/delete/{date}','Backend\MealController@delete')->name('meal.delete');
-
+    });
+    //manage membermoney
+    Route::group(['prefix' => 'membermoney'], function () {
+        Route::get('/view','Backend\MemberMoneyController@index')->name('membermoney.view');
+        Route::get('/create','Backend\MemberMoneyController@create')->name('membermoney.create');
+        Route::post('/store','Backend\MemberMoneyController@store')->name('membermoney.store');
+        Route::get('/edit/{id}','Backend\MemberMoneyController@edit')->name('membermoney.edit');
+        Route::post('/update/{id}','Backend\MemberMoneyController@update')->name('membermoney.update');
+        Route::post('/delete','Backend\MemberMoneyController@delete')->name('membermoney.delete');
+    });
+    //manage Meal Cost
+    Route::group(['prefix' => 'mealcost'], function () {
+        //bazer
+        Route::get('/bazer/view','Backend\BazerCostController@index')->name('bazer.view');
+        Route::get('/bazer/create','Backend\BazerCostController@create')->name('bazer.create');
+        Route::post('/bazer/store','Backend\BazerCostController@store')->name('bazer.store');
+        Route::get('/bazer/edit/{id}','Backend\BazerCostController@edit')->name('bazer.edit');
+        Route::post('/bazer/update/{id}','Backend\BazerCostController@update')->name('bazer.update');
+        Route::post('/bazer/delete','Backend\BazerCostController@delete')->name('bazer.delete');
+        //other
+        Route::get('/other/view','Backend\OtherCostController@index')->name('other.view');
+        Route::get('/other/create','Backend\OtherCostController@create')->name('other.create');
+        Route::post('/other/store','Backend\OtherCostController@store')->name('other.store');
+        Route::get('/other/edit/{id}','Backend\OtherCostController@edit')->name('other.edit');
+        Route::post('/other/update/{id}','Backend\OtherCostController@update')->name('other.update');
+        Route::post('/other/delete','Backend\OtherCostController@delete')->name('other.delete');
     });
     
 });    

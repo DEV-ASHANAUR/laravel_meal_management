@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Model\Mess;
+use App\Model\MonthDetails;
 use App\User;
 use DB;
 
@@ -32,6 +33,10 @@ class MessController extends Controller
             $user = User::find(Auth::user()->id);
             $user->mess_id = $mess->id;
             $user->save();
+            $month = new MonthDetails();
+            $month->mess_id = $mess->id;
+            $month->start_date = date('Y-m-d');
+            $month->save();
         });
         $notification=array(
             'message'=>'Successfully Create Mess !',

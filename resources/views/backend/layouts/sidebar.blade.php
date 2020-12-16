@@ -32,10 +32,37 @@
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                 ></a>
                 <div class="collapse {{ ($prefix == '/meal')?'show':'' }}" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link {{ ($route == 'meal.view')?'active':'' }}" href="{{ route('meal.view') }}">View View</a>
+                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link {{ ($route == 'meal.view')?'active':'' }}" href="{{ route('meal.view') }}">View Meal</a>
                 </div>
                 {{-- @endif --}}
                 {{-- manage meal end --}}
+                {{-- manage meal cost start --}}
+                {{-- @if(Auth::user()->usertype !=='member') --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts"
+                    ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Meal Cost
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                ></a>
+                <div class="collapse {{ ($prefix == '/mealCost')?'show':'' }}" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ ($route == 'bazer.view')?'active':'' }}" href="{{ route('bazer.view') }}">Bazer Cost</a>
+
+                        <a class="nav-link {{ ($route == 'other.view')?'active':'' }}" href="{{ route('other.view') }}">Other's Cost</a>
+                </div>
+                {{-- @endif --}}
+                {{-- manage meal cost end --}}
+                {{-- manage member Depost start --}}
+                {{-- @if(Auth::user()->usertype !=='member') --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts"
+                    ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Member's Deposit
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                ></a>
+                <div class="collapse {{ ($prefix == '/membermoney')?'show':'' }}" id="collapseLayouts4" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link {{ ($route == 'membermoney.view')?'active':'' }}" href="{{ route('membermoney.view') }}">View Deposit</a>
+                </div>
+                {{-- @endif --}}
+                {{-- manage member Depost end --}}
                 
             </div>    
         </div>
