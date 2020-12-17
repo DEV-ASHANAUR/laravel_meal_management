@@ -87,5 +87,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/other/update/{id}','Backend\OtherCostController@update')->name('other.update');
         Route::post('/other/delete','Backend\OtherCostController@delete')->name('other.delete');
     });
+    //Present Month Details
+    Route::group(['prefix' => 'present'], function () {
+        Route::get('month/view','Backend\PresentMonthController@index')->name('presentmonth.view');
+        
+    });
     
 });    

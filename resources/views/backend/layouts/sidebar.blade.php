@@ -43,7 +43,7 @@
                     Meal Cost
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                 ></a>
-                <div class="collapse {{ ($prefix == '/mealCost')?'show':'' }}" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div class="collapse {{ ($prefix == '/mealcost')?'show':'' }}" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ ($route == 'bazer.view')?'active':'' }}" href="{{ route('bazer.view') }}">Bazer Cost</a>
 
@@ -63,6 +63,22 @@
                 </div>
                 {{-- @endif --}}
                 {{-- manage member Depost end --}}
+
+                {{-- manage presentMonth start --}}
+                {{-- @if(Auth::user()->usertype !=='member') --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts"
+                    ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Present Month
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                ></a>
+                <div class="collapse {{ ($prefix == '/present')?'show':'' }}" id="collapseLayouts5" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link {{ ($route == 'presentmonth.view')?'active':'' }}" href="{{ route('presentmonth.view') }}">View Details</a>
+
+                        <a class="nav-link {{ ($route == 'other.view')?'active':'' }}" href="{{ route('other.view') }}">Other's Cost</a>
+                </div>
+                {{-- @endif --}}
+                {{-- manage presentMonth end --}}
                 
             </div>    
         </div>

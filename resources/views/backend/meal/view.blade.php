@@ -33,7 +33,7 @@
                                 @foreach ($meal as $key => $meal)
                                 <tr id="">
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $meal->date }}</td>
+                                    <td>{{ date("d - M - Y",strtotime($meal->date)) }}</td>
                                     <td>{{ $meal->total }}</td>
                                     <td>
                                         {{-- <a href="{{ route('meal.show',$meal->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a> --}}
