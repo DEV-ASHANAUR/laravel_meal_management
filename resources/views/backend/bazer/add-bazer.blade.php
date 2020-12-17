@@ -7,31 +7,31 @@
           <h3 class="mt-4">Meal System</h3>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Add Member's Deposit</li>
+                <li class="breadcrumb-item active">Add Bazer Cost</li>
             </ol>
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="fas fa-plus-circle mr-1"></i>Add Member's Deposit</span>
-                    <small class="d-sm-block"><a href="{{ route('membermoney.view') }}" class="btn btn-success btn-sm"><i class="fas fa-list mr-1"></i>View Member's Deposit</a></small>
+                    <span><i class="fas fa-plus-circle mr-1"></i>Add Bazer Cost</span>
+                    <small class="d-sm-block"><a href="{{ route('bazer.view') }}" class="btn btn-success btn-sm"><i class="fas fa-list mr-1"></i>View Bazer Cost</a></small>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('membermoney.store') }}" method="post" id="Myform">
+                    <form action="{{ route('bazer.store') }}" method="post" id="Myform">
                         @csrf
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12 m-auto">
                                     <div class="card mt-4">
                                         <div class="card-header">
-                                            <h4 class="text-center">Add Member's Deposit
+                                            <h4 class="text-center">Add Bazer Cost
                                             </h4>
                                         </div>    
                                         <div class="card-body">
                                             <div class="mb-3">
                                                 <label for="date">Select Date</label>
-                                                <input type="date" class="form-control" name="date" id="date" value="{{ $date }}" placeholder="yyyy-mm-dd">
+                                                <input type="date" class="form-control mb-2" name="date" id="date" value="{{ $date }}" placeholder="yyyy-mm-dd">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="user_id">Member Name</label>
+                                                <label for="category_id">Member Name</label>
                                                 <select class="form-control" name="name" id="user_id">
                                                     <option value="">Select Name</option>
                                                     @foreach ($user as $user)
@@ -40,16 +40,20 @@
                                                 </select>
                                                 <font class="text-danger">{{ ($errors->has('name'))?$errors->first('name'):'' }}</font>
                                             </div>
-                                            <label for="amount">Deposit Amount</label>
+                                            <label for="amount">Bazer Amount</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                   <span class="input-group-text">৳</span>
                                                 </div>
                                                 <input type="text" class="form-control" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                              </div>
+                                              <font class="text-danger">{{ ($errors->has('amount'))?$errors->first('amount'):'' }}</font>
+                                            <div class="mb-3">
+                                                <label for="name">Bazer Description</label>
+                                                <textarea name="description" class="form-control" id="" cols="3" rows="3" placeholder="Enter Description"></textarea>
+                                                <font class="text-danger">{{ ($errors->has('description'))?$errors->first('description'):'' }}</font>
                                             </div>
-                                            <font class="text-danger">{{ ($errors->has('amount'))?$errors->first('amount'):'' }}</font>
-                                        </div> 
-
+                                        </div>  
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>  
@@ -83,6 +87,9 @@
             required: true,
           },
           name: {
+            required: true,
+          },
+          description: {
             required: true,
           }
         },
@@ -119,12 +126,6 @@
           $(element).removeClass('is-invalid');
         }
       });
-    });
-</script>
-<script>
-    $('.datepicker').datepicker({
-        uiLibrary: 'bootstrap4',
-        format:'yyyy-mm-dd'
     });
 </script>
 @endsection

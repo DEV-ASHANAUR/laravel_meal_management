@@ -16,6 +16,7 @@ class CreateOtherCostsTable extends Migration
         Schema::create('other_costs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('mess_id');
             $table->longText('description')->nullable();
             $table->double('amount');
             $table->date('date')->nullable();

@@ -16,6 +16,7 @@ class CreateBazerCostsTable extends Migration
         Schema::create('bazer_costs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('mess_id')->nullable();
             $table->double('amount');
             $table->longText('description')->nullable();
             $table->date('date')->nullable();

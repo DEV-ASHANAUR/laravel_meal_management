@@ -20,35 +20,43 @@
                 <div class="card-body">
                     <form action="{{ route('membermoney.update',$deposit->id) }}" method="post" id="Myform">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-6 m-auto">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="date">Select Date</label>
-                                        <input type="text" class="form-control-sm datepicker" name="date" id="date" value="{{ $deposit->date }}" placeholder="yyyy-mm-dd" readonly>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 m-auto">
+                                    <div class="card mt-4">
+                                        <div class="card-header">
+                                            <h4 class="text-center">Edit Member's Deposit
+                                            </h4>
+                                        </div>    
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label for="date">Select Date</label>
+                                                <input type="date" class="form-control" name="date" id="date" value="{{ $deposit->date }}" placeholder="yyyy-mm-dd" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="user_id">Member Name</label>
+                                                <select class="form-control" name="name" id="user_id">
+                                                    <option value="">Select Name</option>
+                                                    @foreach ($user as $user)
+                                                        <option value="{{ $user->id }}" {{ ($deposit->user_id == $user->id)?'selected':'' }}>{{ $user->name }}</option>   
+                                                    @endforeach
+                                                </select>
+                                                <font class="text-danger">{{ ($errors->has('name'))?$errors->first('name'):'' }}</font>
+                                            </div>
+                                            <label for="amount">Deposit Amount</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text">৳</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="amount" value="{{ $deposit->money }}" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                            </div>
+                                            <font class="text-danger">{{ ($errors->has('amount'))?$errors->first('amount'):'' }}</font>
+                                        </div> 
+
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>  
                                     </div>
-                                </div>   
-                                <div class="form-row"> 
-                                    <div class="form-group col-md-6">
-                                        <label for="category_id">Member Name</label>
-                                        <select class="select2" name="name" id="user_id">
-                                            <option value="">Select Name</option>
-                                            @foreach ($user as $user)
-                                                <option value="{{ $user->id }}" {{ ($user->id == $deposit->user_id)?'selected':'' }}>{{ $user->name }}</option>   
-                                            @endforeach
-                                        </select>
-                                        <font class="text-danger">{{ ($errors->has('name'))?$errors->first('name'):'' }}</font>
-                                    </div>
-                                </div>  
-                                <div class="form-row">  
-                                    <div class="form-group col-md-6">
-                                        <label for="name">Deposit Amount</label>
-                                        <input type="number" class="form-control form-control-sm" value="{{ $deposit->money }}" name="amount" placeholder="Enter Amount">
-                                        <font class="text-danger">{{ ($errors->has('amount'))?$errors->first('amount'):'' }}</font>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +85,7 @@
           amount: {
             required: true,
           },
-          user_id: {
+          name: {
             required: true,
           }
         },
