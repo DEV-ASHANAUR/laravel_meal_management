@@ -91,6 +91,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'present'], function () {
         Route::get('month/view','Backend\PresentMonthController@index')->name('presentmonth.view');
         Route::get('member/details','Backend\PresentMonthController@memberDetails')->name('memberDetails.view');
+
+        Route::post('data/store','Backend\PresentMonthController@dataStore')->name('data.store');
         
     });
     

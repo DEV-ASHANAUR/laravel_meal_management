@@ -31,7 +31,7 @@
                                                 <input type="date" class="form-control mb-2" name="date" id="date" value="{{ $date }}" placeholder="yyyy-mm-dd">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="category_id">Member Name</label>
+                                                <label for="category_id">Shopper's Name</label>
                                                 <select class="form-control" name="name" id="user_id">
                                                     <option value="">Select Name</option>
                                                     @foreach ($user as $user)

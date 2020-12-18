@@ -9,6 +9,7 @@ use App\Model\OtherCost;
 use App\Model\BazerCost;
 use App\Model\Meal;
 use App\Model\MemberMoney;
+use App\Model\MonthReport;
 use App\User;
 use DB;
 
@@ -41,5 +42,25 @@ class PresentMonthController extends Controller
         //dd($memberDeposit);
         // dd($memberDetails);
         return view('backend.presentMonth.member-datails',compact('memberDetails','mealRate','memberDeposit'));
+    }
+    public function dataStore(Request $request)
+    {
+        // dd($request->all());
+        $user_name = count($request->name);
+        for($i = 0; $i < $user_name; $i++ ){
+            $report = new MonthReport();
+            $report->name = $request->name[$i];
+            $report->total_meal = $request->total_meal[$i];
+            $report->total_cost = $request->total_cost[$i];
+            $report->deposit_amount = $request->deposit_amount[$i];
+            $report->balance = $request->balance[$i];
+            $report->created_by = Auth::user()->name;
+            $report->save();
+        }
+        $notification=array(
+            'message'=>'Successfully Add Present Month Report And Start New Month !',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }
