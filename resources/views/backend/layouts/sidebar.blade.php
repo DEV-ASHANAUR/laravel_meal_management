@@ -75,7 +75,7 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ ($route == 'presentmonth.view')?'active':'' }}" href="{{ route('presentmonth.view') }}">View Details</a>
 
-                        <a class="nav-link {{ ($route == 'other.view')?'active':'' }}" href="{{ route('other.view') }}">Other's Cost</a>
+                        <a class="nav-link {{ ($route == 'memberDetails.view')?'active':'' }}" href="{{ route('memberDetails.view') }}">Member Details</a>
                 </div>
                 {{-- @endif --}}
                 {{-- manage presentMonth end --}}

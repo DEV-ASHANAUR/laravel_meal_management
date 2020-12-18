@@ -57,10 +57,7 @@ class MealController extends Controller
             'message'=>'Successfully Meal Updated !',
             'alert-type'=>'success'
         );
-        // return redirect()->route('meal.view')->with($notification);
         return redirect()->back()->with($notification);
-
-        
     }
     /**
      * create

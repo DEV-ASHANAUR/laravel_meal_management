@@ -10,4 +10,9 @@ class Meal extends Model
     {
         return $this->belongsTo('App\User','user_id','id');
     }
+    public function memDeposit()
+    {
+        return $this->belongsTo('App\Model\MemberMoney','user_id','user_id');
+    }
+
 }
