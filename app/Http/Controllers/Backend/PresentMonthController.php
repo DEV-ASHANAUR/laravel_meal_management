@@ -10,6 +10,7 @@ use App\Model\BazerCost;
 use App\Model\Meal;
 use App\Model\MemberMoney;
 use App\Model\MonthReport;
+use App\Model\MonthDetails;
 use App\User;
 use DB;
 
@@ -23,9 +24,26 @@ class PresentMonthController extends Controller
         $totalMeal = Meal::where('mess_id',$mess_id)->sum('meal');
         $bazerCost = BazerCost::where('mess_id',$mess_id)->sum('amount');
         $OtherCost = OtherCost::where('mess_id',$mess_id)->sum('amount');
+        if(!$totalDeposit){
+            $totalDeposit = 0;
+        }
+        if(!$totalMeal){
+            $totalMeal = 0;
+        }
+        if(!$bazerCost){
+            $bazerCost = 0;
+        }
+        if(!$OtherCost){
+            $OtherCost = 0;
+        }
         $totalCost = ($bazerCost + $OtherCost);
         $totalBalance = ($totalDeposit - $totalCost);
-        $mealRate = ($totalCost/$totalMeal);
+        if($totalMeal == 0){
+            $mealRate = 0;
+        }else{
+            $mealRate = ($totalCost/$totalMeal);
+        }
+        //dd($totalBalance);
         return view('backend.presentMonth.view-details',compact('totalDeposit','totalMeal','bazerCost','OtherCost','totalCost','totalBalance','mealRate','totalMember'));
         // dd($totalBalance);
     }
@@ -37,15 +55,27 @@ class PresentMonthController extends Controller
         $totalMeal = Meal::where('mess_id',$mess_id)->sum('meal');
         $bazerCost = BazerCost::where('mess_id',$mess_id)->sum('amount');
         $OtherCost = OtherCost::where('mess_id',$mess_id)->sum('amount');
+        if(!$totalMeal){
+            $totalMeal = 0;
+        }
+        if(!$bazerCost){
+            $bazerCost = 0;
+        }
+        if(!$OtherCost){
+            $OtherCost = 0;
+        }
         $totalCost = ($bazerCost + $OtherCost);
-        $mealRate = ($totalCost/$totalMeal);
-        //dd($memberDeposit);
-        // dd($memberDetails);
+        if($totalMeal == 0){
+            $mealRate = 0;
+        }else{
+            $mealRate = ($totalCost/$totalMeal);
+        }
         return view('backend.presentMonth.member-datails',compact('memberDetails','mealRate','memberDeposit'));
     }
     public function dataStore(Request $request)
     {
         // dd($request->all());
+
         $user_name = count($request->name);
         for($i = 0; $i < $user_name; $i++ ){
             $report = new MonthReport();

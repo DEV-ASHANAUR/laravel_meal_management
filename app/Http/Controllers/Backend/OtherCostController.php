@@ -13,7 +13,8 @@ class OtherCostController extends Controller
 {
     public function index()
     {
-        $other = OtherCost::all();
+        $mess_id = Auth::user()->mess_id;
+        $other = OtherCost::where('mess_id',$mess_id)->get();
         return view('backend.other.view-other',compact('other'));
     }
     public function create()

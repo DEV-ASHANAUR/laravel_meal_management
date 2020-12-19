@@ -88,7 +88,9 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-right" colspan="7">
-                                            <button class="btn btn-primary w-100 d-block">Save Present Data & Start New Month</button>
+                                            @if (count($memberDetails) > 0)
+                                                <button class="btn btn-primary w-100 d-block">Save Present Data & Start New Month</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 </tfoot>

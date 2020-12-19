@@ -12,7 +12,8 @@ class MemberMoneyController extends Controller
 {
     public function index()
     {
-        $membermoney = MemberMoney::all();
+        $mess_id = Auth::user()->mess_id;
+        $membermoney = MemberMoney::where('mess_id',$mess_id)->get();
         return view('backend.memberdeposit.view-deposit',compact('membermoney'));
     }
     public function create()

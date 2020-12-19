@@ -12,7 +12,8 @@ class BazerCostController extends Controller
 {
     public function index()
     {
-        $bazer = BazerCost::all();
+        $mess_id = Auth::user()->mess_id;
+        $bazer = BazerCost::where('mess_id',$mess_id)->get();
         return view('backend.bazer.view-bazer',compact('bazer'));
     }
     public function create()
