@@ -75,18 +75,38 @@ class PresentMonthController extends Controller
     public function dataStore(Request $request)
     {
         // dd($request->all());
+        $mess_id = Auth::user()->mess_id;
+        $monthDetails = MonthDetails::where('mess_id',$mess_id)->where('status',0)->first();
+        $monthDetails->end_date = date('Y-m-d');
+        $monthDetails->status = 1;
 
-        $user_name = count($request->name);
-        for($i = 0; $i < $user_name; $i++ ){
-            $report = new MonthReport();
-            $report->name = $request->name[$i];
-            $report->total_meal = $request->total_meal[$i];
-            $report->total_cost = $request->total_cost[$i];
-            $report->deposit_amount = $request->deposit_amount[$i];
-            $report->balance = $request->balance[$i];
-            $report->created_by = Auth::user()->name;
-            $report->save();
-        }
+        DB::transaction(function () use($request,$monthDetails,$mess_id) {
+            // $monthDetails->save();
+            if($monthDetails->save()){
+                $count = count($request->name);
+                for($i = 0; $i < $count; $i++ ){
+                    $report = new MonthReport();
+                    $report->name = $request->name[$i];
+                    $report->total_meal = $request->total_meal[$i];
+                    $report->total_cost = $request->total_cost[$i];
+                    $report->deposit_amount = $request->deposit_amount[$i];
+                    $report->balance = $request->balance[$i];
+                    $report->monthDetails_id = $monthDetails->id;
+                    $report->created_by = Auth::user()->name;
+                    $report->save();
+                }
+            }
+            $startmonth = new MonthDetails();
+            $startmonth->mess_id = $mess_id;
+            $startmonth->start_date = date('Y-m-d');
+            // $startmonth->save();
+            if($startmonth->save()){
+                OtherCost::where('mess_id',$mess_id)->delete();
+                BazerCost::where('mess_id',$mess_id)->delete();
+                Meal::where('mess_id',$mess_id)->delete();
+                MemberMoney::where('mess_id',$mess_id)->delete();
+            }
+        });
         $notification=array(
             'message'=>'Successfully Add Present Month Report And Start New Month !',
             'alert-type'=>'success'
