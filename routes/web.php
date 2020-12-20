@@ -91,9 +91,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'present'], function () {
         Route::get('month/view','Backend\PresentMonthController@index')->name('presentmonth.view');
         Route::get('member/details','Backend\PresentMonthController@memberDetails')->name('memberDetails.view');
-
         Route::post('data/store','Backend\PresentMonthController@dataStore')->name('data.store');
         
+    });
+    //manage PastMonth Details
+    Route::group(['prefix' => 'pastMonth'], function () {
+        Route::get('/create','Backend\PastController@index')->name('pastMonth.view');
+        Route::get('/show/{id}','Backend\PastController@show')->name('pastMonth.show');
+        Route::get('/edit/{id}','Backend\PastController@edit')->name('pastMonth.edit');
+        Route::post('/update/{id}','Backend\PastController@update')->name('pastMonth.update');
+        Route::post('/delete','Backend\PastController@delete')->name('pastMonth.delete');
     });
     
 });    

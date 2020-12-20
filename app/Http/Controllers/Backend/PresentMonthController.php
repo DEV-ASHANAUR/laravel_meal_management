@@ -87,6 +87,7 @@ class PresentMonthController extends Controller
                 for($i = 0; $i < $count; $i++ ){
                     $report = new MonthReport();
                     $report->name = $request->name[$i];
+                    $report->meal_rate = $request->meal_rate[$i];
                     $report->total_meal = $request->total_meal[$i];
                     $report->total_cost = $request->total_cost[$i];
                     $report->deposit_amount = $request->deposit_amount[$i];
@@ -108,7 +109,7 @@ class PresentMonthController extends Controller
             }
         });
         $notification=array(
-            'message'=>'Successfully Add Present Month Report And Start New Month !',
+            'message'=>'Successfully Store Present Month Report And Start New Month !',
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);

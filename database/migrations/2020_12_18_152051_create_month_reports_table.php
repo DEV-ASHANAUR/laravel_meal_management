@@ -16,6 +16,7 @@ class CreateMonthReportsTable extends Migration
         Schema::create('month_reports', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->double('meal_rate')->nullable();
             $table->double('total_meal');
             $table->double('total_cost');
             $table->double('deposit_amount')->nullable();

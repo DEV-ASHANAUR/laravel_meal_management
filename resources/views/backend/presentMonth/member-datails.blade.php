@@ -39,7 +39,8 @@
                                             <input type="hidden" name="name[]" value="{{ $item->user->name }}">
                                         </td>
                                         <td>
-                                            {{ number_format($mealRate,2)." Tk" }} 
+                                            {{ number_format($mealRate,2)." Tk" }}
+                                            <input type="hidden" name="meal_rate[]" value="{{ round($mealRate,2) }}"> 
                                         </td>
                                         <td>
                                             {{ $item->total }}
@@ -78,7 +79,7 @@
                                             @endforeach
                                             </span>
                                             @if ($bal !== 0)
-                                                {{ -number_format($mealRate*$item->total,2)." Tk" }}
+                                                -{{ number_format($mealRate*$item->total,2)." Tk" }}
                                                 <input type="hidden" name="balance[]" value="{{ -(round($mealRate*$item->total,2)) }}">
                                             @endif
                                         </td>

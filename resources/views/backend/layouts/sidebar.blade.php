@@ -55,7 +55,7 @@
                 {{-- @if(Auth::user()->usertype !=='member') --}}
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts"
                     ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Member's Deposit
+                    Member's Money
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                 ></a>
                 <div class="collapse {{ ($prefix == '/membermoney')?'show':'' }}" id="collapseLayouts4" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
@@ -79,6 +79,18 @@
                 </div>
                 {{-- @endif --}}
                 {{-- manage presentMonth end --}}
+                {{-- manage member Depost start --}}
+                {{-- @if(Auth::user()->usertype !=='member') --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts"
+                    ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Previous Month
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                ></a>
+                <div class="collapse {{ ($prefix == '/pastMonth')?'show':'' }}" id="collapseLayouts6" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link {{ ($route == 'pastMonth.view')?'active':'' }}" href="{{ route('pastMonth.view') }}">View Details</a>
+                </div>
+                {{-- @endif --}}
+                {{-- manage member Depost end --}}
                 
             </div>    
         </div>
