@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\OtherCost;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MealCost;
+use App\Model\Mess;
 
 
 class OtherCostController extends Controller
@@ -40,7 +43,25 @@ class OtherCostController extends Controller
         $other->description = $request->description;
         $other->mess_id = $mess_id;
         $other->created_by = Auth::user()->id;
-        $other->save();
+        // $other->save();
+
+        $tar_user = User::where('mess_id',$mess_id)->get();
+        $tar_mess = Mess::where('id',$mess_id)->first();
+        $sub = $request->date." Other Cost Added";
+        $data = array(
+            'user_name' => Auth::user()->name,
+            'mess_name' => $tar_mess->name,
+            'date' => $request->date,
+            'total' => $request->amount,
+            'description' => $request->description,
+            'route' => 'other.view',
+        );
+        if($other->save()){
+            foreach($tar_user as $user){
+                Mail::to($user->email)->queue(new MealCost($sub,$data));
+            }
+        }
+
         $notification=array(
             'message'=>'Successfully Add Other Cost !',
             'alert-type'=>'success'
@@ -70,7 +91,25 @@ class OtherCostController extends Controller
         $other->description = $request->description;
         $other->mess_id = $mess_id;
         $other->created_by = Auth::user()->id;
-        $other->save();
+        // $other->save();
+
+        $tar_user = User::where('mess_id',$mess_id)->get();
+        $tar_mess = Mess::where('id',$mess_id)->first();
+        $sub = $request->date." Other Cost Modified";
+        $data = array(
+            'user_name' => Auth::user()->name,
+            'mess_name' => $tar_mess->name,
+            'date' => $request->date,
+            'total' => $request->amount,
+            'description' => $request->description,
+            'route' => 'other.view',
+        );
+        if($other->save()){
+            foreach($tar_user as $user){
+                Mail::to($user->email)->queue(new MealCost($sub,$data));
+            }
+        }
+
         $notification=array(
             'message'=>'Successfully Update Other Cost !',
             'alert-type'=>'success'

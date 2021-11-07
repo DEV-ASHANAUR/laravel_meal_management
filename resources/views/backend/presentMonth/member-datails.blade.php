@@ -89,9 +89,11 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-right" colspan="7">
+                                        @if(Auth::user()->usertype !=='member')
                                             @if (count($memberDetails) > 0)
-                                                <button class="btn btn-primary w-100 d-block">Save Present Data & Start New Month</button>
+                                                <button onclick="return confirm('Are you sure you want to start new month?');" class="btn btn-primary w-100 d-block">Save Present Data & Start New Month</button>
                                             @endif
+                                        @endif    
                                         </td>
                                     </tr>
                                 </tfoot>

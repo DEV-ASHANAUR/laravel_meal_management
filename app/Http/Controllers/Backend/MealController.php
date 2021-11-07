@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Model\Meal;
+use App\Model\Mess;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MealMail;
+// use Mail;
 class MealController extends Controller
 {
     public function index()
@@ -52,6 +56,25 @@ class MealController extends Controller
             $meal->date = $request->date;
             $meal->created_by = Auth::user()->id;
             $meal->save();
+            $tar_user = User::where('id',$request->user_id[$i])->first();
+            $tar_mess = Mess::where('id',$mess_id)->first();
+            $sub = 'Modified Your Meal';
+            $data = array(
+                'user_name' => Auth::user()->name,
+                'mess_name' => $tar_mess->name,
+                'email' => $tar_user->email,
+                'date' => $request->date,
+                'meal' => $request->meal[$i]
+            );
+
+            Mail::to($data['email'])->queue(new MealMail($sub,$data));
+    
+            // Mail::send('backend.mail.create-mail', $data, function ($message) use($data) {
+            //     $message->from('pasamess@gmail.com', 'Your Meal is Added!');
+            //     $message->to($data['email']);
+            //     $message->subject('New Alert form Your Mess!');
+            // });
+            
         }
         $notification=array(
             'message'=>'Successfully Meal Updated !',
@@ -97,6 +120,17 @@ class MealController extends Controller
                 $meal->meal = $request->meal[$i];
                 $meal->date = $date;
                 $meal->created_by = Auth::user()->id;
+                $tar_user = User::where('id',$request->user_id[$i])->first();
+                $tar_mess = Mess::where('id',$mess_id)->first();
+                $sub = 'Added Your Meal';
+                $data = array(
+                    'user_name' => Auth::user()->name,
+                    'mess_name' => $tar_mess->name,
+                    'email' => $tar_user->email,
+                    'date' => $date,
+                    'meal' => $request->meal[$i]
+                );
+                Mail::to($data['email'])->queue(new MealMail($sub,$data));
                 $meal->save();
             }
             $notification=array(

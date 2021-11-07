@@ -20,30 +20,44 @@
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
             .content {
                 text-align: center;
+                width: 100%;
+                height: 100vh;
+                background-position: center;
+                background-size: cover;
             }
-
+            .container{
+                width: 100%;
+                height: 100vh;
+                background-color: rgb(0 0 0 / 88%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            
+            }
+            .container .heading h2{
+                padding: 0 15px;
+                color: #fff;
+                text-transform: uppercase;
+                font-size: 40px;
+                letter-spacing: 2px;
+            }
+            .user a{
+                color: rgba(255, 255, 255, 0.623);
+                text-decoration: none;
+                margin: 0 10px;
+                font-weight: 600;
+                font-size: 18px;
+                padding: 5px 15px;
+                border: 2px solid rgba(255, 255, 255, 0.623);
+                transition: .3s;
+            }
+            .user a:hover{
+                color: #fff;
+                border-color: #fff;
+            }
             .title {
                 font-size: 84px;
             }
@@ -65,8 +79,13 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
+            <div class="content"style="background-image: url({{ asset('backend') }}/img/bg.png)">
+                <div class="container m-b-md">
+                    <div class="heading">
+                        <h2>Meal Managment System</h2>
+                    </div>
+                @if (Route::has('login'))
+                <div class="user">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -77,22 +96,7 @@
                         @endif
                     @endauth
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                 @endif
                 </div>
             </div>
         </div>

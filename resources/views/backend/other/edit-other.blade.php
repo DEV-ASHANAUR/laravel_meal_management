@@ -47,7 +47,7 @@
                                                 <div class="input-group-prepend">
                                                   <span class="input-group-text">৳</span>
                                                 </div>
-                                                <input type="text" class="form-control" value="{{ $other->amount }}" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                                <input type="number" class="form-control" value="{{ $other->amount }}" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
                                             </div>
                                             <font class="text-danger">{{ ($errors->has('amount'))?$errors->first('amount'):'' }}</font>
 

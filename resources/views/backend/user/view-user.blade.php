@@ -37,12 +37,15 @@
                                     <td class="text-capitalize">{{ $user->usertype }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    @php
+                                      $count_user = App\Model\Meal::where('user_id',$user->id)->count();   
+                                    @endphp
                                     <td>
                                         <a href="{{ route('users.show',$user->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a>
 
                                         <a href="{{ route('users.edit',$user->id) }}" title="Edit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-1"></i></a>
 
-                                        <a href="{{ route('users.delete') }}" id="delete" title="Delete" data-id="{{ $user->id }}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm {{ ($id == $user->id)?'disabled':''}}"><i class="fas fa-trash mr-1"></i></a>
+                                        <a href="{{ route('users.delete') }}" id="delete" title="Delete" data-id="{{ $user->id }}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm {{ ($id == $user->id || $count_user > 0)?'disabled':''}}"><i class="fas fa-trash mr-1"></i></a>
                                         
                                     </td>
                                 </tr>

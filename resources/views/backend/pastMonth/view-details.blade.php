@@ -14,8 +14,8 @@
             </div> --}}
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="fas fa-table mr-1"></i>View Meal</span>
-                    <small class="d-sm-block"><a href="{{ route('meal.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle mr-1"></i> Add Meal</a></small>
+                    <span><i class="fas fa-table mr-1"></i>View History</span>
+                    <!-- <small class="d-sm-block"><a href="{{ route('meal.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle mr-1"></i> Add Meal</a></small> -->
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -37,10 +37,11 @@
                                     <td class="text-center">({{ date("d - M - Y",strtotime($item->start_date)) }}) - ({{ date("d - M - Y",strtotime($item->end_date)) }})</td>
                                     <td class="text-center">
                                         <a href="{{ route('pastMonth.show',$item->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a>
-
+                                        @if(Auth::user()->usertype !=='member')
                                         <a href="{{ route('pastMonth.edit',$item->id) }}" title="Edit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-1"></i></a>
 
                                         <a href="{{ route('pastMonth.delete') }}" id="delete" title="Delete" data-id="{{ $item->id }}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

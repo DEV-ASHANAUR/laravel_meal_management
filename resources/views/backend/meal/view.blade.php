@@ -15,7 +15,9 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span><i class="fas fa-table mr-1"></i>View Meal</span>
+                    @if(Auth::user()->usertype !=='member')
                     <small class="d-sm-block"><a href="{{ route('meal.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle mr-1"></i> Add Meal</a></small>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,7 +27,9 @@
                                     <th>Sl.</th>
                                     <th>Date</th>
                                     <th>Total Meal</th>
+                                    @if(Auth::user()->usertype !=='member')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             
@@ -35,6 +39,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ date("d - M - Y",strtotime($meal->date)) }}</td>
                                     <td>{{ $meal->total }}</td>
+                                    @if(Auth::user()->usertype !=='member')
                                     <td>
                                         {{-- <a href="{{ route('meal.show',$meal->id) }}" title="Show" class="btn btn-success btn-sm"><i class="fas fa-eye mr-1"></i></a> --}}
 
@@ -42,6 +47,7 @@
 
                                         <a href="{{ route('meal.delete',$meal->date) }}" id="deletemass" class="btn btn-danger btn-sm"><i class="fas fa-trash mr-1"></i></a>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -50,7 +56,9 @@
                                     <th>Sl.</th>
                                     <th>Date</th>
                                     <th>Total Meal</th>
+                                    @if(Auth::user()->usertype !=='member')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>

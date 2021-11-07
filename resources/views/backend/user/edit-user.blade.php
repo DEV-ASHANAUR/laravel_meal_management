@@ -18,16 +18,23 @@
                     <small class="d-sm-block"><a href="{{ route('users.view') }}" class="btn btn-success btn-sm"><i class="fas fa-list mr-1"></i>User List</a></small>
                 </div>
                 <div class="card-body">
+                  
                     <form action="{{ route('users.update',$editdata->id) }}" method="post" id="Myform">
                         @csrf
                         <div class="form-row">
+                            @php
+                              if($editdata->id == Auth::user()->id){
+                                $check_permission = App\User::where('usertype','monitor')->where('id','!=',$editdata->id)->count();
+                              }else{
+                                $check_permission = 1;
+                              }
+                            @endphp
                             <div class="form-group col-md-4">
                                 <label for="usertype">User Role</label>
-                                <select class="form-control" name="usertype" id="usertype">
+                                <select class="form-control" name="usertype" id="usertype" {{ ($check_permission>0)?'':'disabled'}}>
                                     <option value="">Select Role</option>
-                                    <option value="admin" {{ ($editdata->usertype == "admin")?"selected":"" }}>Admin</option>
-                                    <option value="user" {{ ($editdata->usertype == "user")?"selected":"" }}>User</option>
-                                    <option value="customer" {{ ($editdata->usertype == "customer")?"selected":"" }}>Customer</option>
+                                    <option value="monitor" {{ ($editdata->usertype == "monitor")?"selected":"" }}>Monitor</option>
+                                    <option value="member" {{ ($editdata->usertype == "member")?"selected":"" }}>Member</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">

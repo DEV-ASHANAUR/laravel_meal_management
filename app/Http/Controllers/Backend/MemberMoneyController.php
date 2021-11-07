@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\MemberMoney;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MembeDeposity;
+use App\Model\Mess;
 
 class MemberMoneyController extends Controller
 {
@@ -37,7 +40,20 @@ class MemberMoneyController extends Controller
         $amount->money = $request->amount;
         $amount->mess_id = $mess_id;
         $amount->created_by = Auth::user()->id;
-        $amount->save();
+        // $amount->save();
+
+        $tar_user = User::where('id',$request->name)->first();
+        $tar_mess = Mess::where('id',$mess_id)->first();
+        $sub = $request->date." Your Money is Deposit";
+        $data = array(
+            'user_name' => Auth::user()->name,
+            'mess_name' => $tar_mess->name,
+            'date' => $request->date,
+            'total' => $request->amount,
+        );
+        if($amount->save()){
+            Mail::to($tar_user->email)->queue(new MembeDeposity($sub,$data));
+        }
         $notification=array(
             'message'=>'Successfully Create Deposit !',
             'alert-type'=>'success'
@@ -65,7 +81,21 @@ class MemberMoneyController extends Controller
         $amount->money = $request->amount;
         $amount->mess_id = $mess_id;
         $amount->created_by = Auth::user()->id;
-        $amount->save();
+        // $amount->save();
+
+        $tar_user = User::where('id',$request->name)->first();
+        $tar_mess = Mess::where('id',$mess_id)->first();
+        $sub = $request->date." Your Money is Modified";
+        $data = array(
+            'user_name' => Auth::user()->name,
+            'mess_name' => $tar_mess->name,
+            'date' => $request->date,
+            'total' => $request->amount,
+        );
+        if($amount->save()){
+            Mail::to($tar_user->email)->queue(new MembeDeposity($sub,$data));
+        }
+
         $notification=array(
             'message'=>'Successfully update Deposit !',
             'alert-type'=>'success'

@@ -35,7 +35,6 @@
                                 <select class="form-control" name="usertype" id="usertype">
                                     <option value="">Select Role</option>
                                     <option value="monitor">Monitor</option>
-                                    {{-- <option value="manager">Manager</option> --}}
                                     <option value="member">Member</option>
                                 </select>
                             </div>

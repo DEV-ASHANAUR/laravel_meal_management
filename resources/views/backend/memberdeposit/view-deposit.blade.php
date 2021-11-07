@@ -15,7 +15,9 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span><i class="fas fa-table mr-1"></i>View Member's Deposit</span>
+                    @if(Auth::user()->usertype !=='member')
                     <small class="d-sm-block"><a href="{{ route('membermoney.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle mr-1"></i> Add Member's Deposit</a></small>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -26,7 +28,9 @@
                                     <th>Name</th>
                                     <th>Deposit Amount</th>
                                     <th>Date</th>
+                                    @if(Auth::user()->usertype !=='member')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             
@@ -37,6 +41,7 @@
                                     <td class="text-capitalize">{{ $item->user->name }}</td>
                                     <td>{{ number_format($item->money,2) }} tk</td>
                                     <td>{{ date("d - M - Y",strtotime($item->date)) }}</td>
+                                    @if(Auth::user()->usertype !=='member')
                                     <td>
 
                                         <a href="{{ route('membermoney.edit',$item->id) }}" title="Edit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-1"></i></a>
@@ -44,6 +49,7 @@
                                         <a href="{{ route('membermoney.delete') }}" id="delete" title="Delete" data-id="{{ $item->id }}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm "><i class="fas fa-trash mr-1"></i></a>
                                         
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -53,7 +59,9 @@
                                     <th>Name</th>
                                     <th>Deposit Amount</th>
                                     <th>Date</th>
+                                    @if(Auth::user()->usertype !=='member')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>

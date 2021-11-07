@@ -47,4 +47,5 @@ class PastController extends Controller
         $report = MonthReport::where('monthDetails_id',$id)->get();
         return view('backend.pastMonth.show',compact('report'));
     }
+    
 }
